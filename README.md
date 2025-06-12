@@ -1,15 +1,18 @@
 ## 🎁 מערכת מכירה סינית - פרויקט גמר
+```
 מערכת Web מלאה לניהול מכירה סינית (הגרלות על מתנות), הכוללת:
 - 📦 ניהול מתנות: הוספה, עריכה, מחיקה ומעקב מלאי
 - 👥 ניהול תורמים
 - 🛍 קניית כרטיסים על ידי משתמשים
 - 🎲 ביצוע הגרלה אוטומטית לכל מתנה
 - 🏆 פרסום זוכים לפי מתנה
+```
 ## 🛠 טכנולוגיות
--**Frontend:** Angular + TypeScript
+- **Frontend:** Angular + TypeScript
 - **Backend:** ASP.NET Core (C#)
 - **Database:** SQL Server
+- ```
 
-הפרויקט פותח כחלק מלימודי הנדסת תוכנה במכללת מה"ט.
-מפתחת: חני יעקובוביץ
+הפרויקט פותח כחלק מלימודי הנדסת תוכנה במסגרת מה"ט.
+מפתחת: חנה יעקובוביץ
 
