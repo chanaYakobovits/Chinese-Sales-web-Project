@@ -11,15 +11,31 @@
 - **Frontend:** Angular + TypeScript
 - **Backend:** ASP.NET Core (C#)
 - **Database:** SQL Server
-  ---
+
 ## 🚀 איך מריצים את הפרויקט
 
 1. שכפלי את הרפוזיטורי:
 
 ```bash
-git clone https://github.com/chanaYakobovits/Python-project.git
+git clone https://github.com/chanaYakobovits/Chinese-Sales-web-Project.git
+cd Chinese-Sales-web-Project
+```
 
-cd Python-project
+הרצת צד שרת – C# (ASP.NET Core)
+
+פתחי את התיקייה server/ ב־Visual Studio
+
+הריצי את הפרויקט הראשי (קובץ .sln)
+
+הרצת צד לקוח – Angular
+
+```bash
+cd client
+npm install
+ng serve
+```
+
+
 
 
 ```
