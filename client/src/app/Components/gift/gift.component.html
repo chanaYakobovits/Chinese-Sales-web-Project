@@ -1,0 +1,11 @@
+<app-gift-list (giftDialog)="giftDialog= $event" (pageChange)="pageChange($event)" [(flagAdd)]="flagAdd"
+    [(selectedId)]="selectedId" (reload)="reloadGifts()">
+</app-gift-list>
+
+<app-edit-gift *ngIf="flagAdd"   [giftDialog]="giftDialog">
+</app-edit-gift>
+
+<app-edit-gift *ngIf="selectedId!=0" [(selectedId)]="selectedId" [giftDialog]="giftDialog" [page]="page"
+(flagAdd)="closeAdd($event)" >
+</app-edit-gift>
+

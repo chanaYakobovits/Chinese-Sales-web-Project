@@ -1,0 +1,72 @@
+<div class="card" #ff dir="rtl">
+    <p-toast></p-toast>
+    <p-dialog [(visible)]="giftDialog" [style]="{ width: '450px' }" header="פרטי מתנה" [modal]="true" styleClass="p-fluid">
+        <div class="relative" style="height: 15rem;" *ngIf="selectedId != 0">
+            <img *ngIf="gift.image" [src]="gift.image" [alt]="gift.name"
+                class="block xl:block mx-auto border-round w-full h-full" style="object-fit: cover;" />
+        </div>
+        <form [formGroup]="giftForm" (ngSubmit)="save()">
+            <!-- שם המתנה -->
+            <div class="field">
+                <label for="name">שם מתנה*</label>
+                <input id="name" type="text" pInputText formControlName="name" />
+                <small class="p-error" *ngIf="giftForm.get('name')?.hasError('required') && giftForm.get('name')?.touched">
+                    שדה זה הוא חובה
+                </small>
+                <small class="p-error" *ngIf="giftForm.get('name')?.hasError('minlength') && giftForm.get('name')?.touched">
+                    שם המתנה חייב להכיל לפחות 3 תווים
+                </small>
+                <small class="p-error" *ngIf="giftForm.get('name')?.hasError('maxlength') && giftForm.get('name')?.touched">
+                    שם המתנה יכול להכיל עד 50 תווים
+                </small>
+            </div>
+
+            <!-- תורם -->
+            <div class="field">
+                <label for="donatorId">תורם*</label>
+                <p-dropdown id="donatorId" formControlName="donatorId" [options]="donators" optionLabel="name" optionValue="id"></p-dropdown>
+                <small class="p-error" *ngIf="giftForm.get('donatorId')?.hasError('required') && giftForm.get('donatorId')?.touched">
+                    שדה זה הוא חובה
+                </small>
+            </div>
+
+            <!-- קטגוריה -->
+            <div class="field">
+                <label>קטגוריה</label>
+                <div *ngFor="let c of categorys; let i = index">
+                    <p-radioButton [value]="c.id" formControlName="categoryId" id="category{{ i }}"></p-radioButton>
+                    <label for="category{{ i }}">{{ c.name }}</label>
+                </div>
+            </div>
+
+            <!-- מחיר כרטיס -->
+            <div class="field">
+                <label for="pay">מחיר כרטיס*</label>
+                <input id="pay" type="number" pInputText formControlName="pay" />
+                <small class="p-error" *ngIf="giftForm.get('pay')?.hasError('required') && giftForm.get('pay')?.touched">
+                    שדה זה הוא חובה
+                </small>
+                <small class="p-error" *ngIf="giftForm.get('pay')?.hasError('min') && giftForm.get('pay')?.touched">
+                    הערך חייב להיות לפחות 10
+                </small>
+                <small class="p-error" *ngIf="giftForm.get('pay')?.hasError('max') && giftForm.get('pay')?.touched">
+                    הערך חייב להיות לכל היותר 100
+                </small>
+            </div>
+
+            <!-- תמונה -->
+            <div class="field">
+                <label for="image">תמונה</label>
+                <input id="image" type="text" pInputText formControlName="image" />
+                <small class="p-error" *ngIf="giftForm.get('image')?.hasError('required') && giftForm.get('image')?.touched">
+                    שדה זה הוא חובה
+                </small>
+            </div>
+        </form>
+
+        <ng-template pTemplate="footer">
+            <p-button label="ביטול" icon="pi pi-times" [text]="true" (onClick)="cancel()"></p-button>
+            <p-button label="שמירה" icon="pi pi-check" [text]="true" (onClick)="save()"></p-button>
+        </ng-template>
+    </p-dialog>
+</div>

@@ -1,0 +1,36 @@
+<p-toast></p-toast>
+<div class="stepsdemo-content">
+    <p-card>
+        <ng-template pTemplate="title"> עמוד תשלום </ng-template>
+        <ng-template pTemplate="subtitle"> הכנס פרטי כרטיס אשראי</ng-template>
+        <ng-template pTemplate="content">
+            <div class="p-fluid formgrid grid">
+                <div class="field col-12">
+                    <label for="class">שם בעל הכרטיס</label>
+                    <input type="text" required pInputText [(ngModel)]="paymentInformation.cardholderName" />
+                </div>
+                <div class="field col-8">
+                    <label id="number" for="lastname">מס אשראי</label>
+                    <p-inputMask inputId="number" mask="9999-9999-9999-9999" [(ngModel)]="paymentInformation.cardholderNumber"></p-inputMask>
+                </div>
+                <div class="field col-2">
+                    <label id="date" for="date">תוקף</label>
+                    <p-inputMask inputId="date" mask="99/99" [(ngModel)]="paymentInformation.date"></p-inputMask>
+                </div>
+                <div class="field col-2">
+                    <label for="cvv">CVV</label>
+                    <p-inputMask id="cvv" mask="999" [(ngModel)]="paymentInformation.cvv"></p-inputMask>
+                </div>
+            </div>
+           
+            <div  class="payment-button" (click)="pay()">
+              לתשלום
+            </div>
+            
+       
+        </ng-template>
+        <ng-template pTemplate="footer">
+         
+        </ng-template>
+    </p-card>
+</div>

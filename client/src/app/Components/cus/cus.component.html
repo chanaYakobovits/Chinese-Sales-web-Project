@@ -1,0 +1,160 @@
+<div class="card" #ff dir="rtl">
+    <p-toast></p-toast>
+
+    <p-toolbar styleClass="mb-4 gap-2">
+        <ng-template pTemplate="left">
+            <div class="card flex justify-content-center">
+                <p-sidebar [(visible)]="sidebarVisible" styleClass="w-30rem">
+                    <div class="card xl:flex xl:justify-content-center">
+                        <p-orderList #dt [value]="orders" [listStyle]="{ height: '35rem' }" header="סל קניות">
+                            <ng-template let-order pTemplate="item">
+                                <div class="flex flex-wrap p-2 align-items-center gap-3">
+                                    <img *ngIf="order?.image" [src]="order.image" [alt]="order.name"
+                                        class="block xl:block mx-auto border-round w-6 h-6"
+                                        style="object-fit: cover;" />
+                                    <div class="flex-1 flex flex-column gap-2">
+                                        <span class="font-bold">{{ order.name }}</span>
+                                    </div>
+                                    <span class="font-bold text-900">
+                                        {{ order.pay | currency: 'ILS' }}
+                                    </span>
+                                    <div class="flex align-items-center gap-2">
+                                        <i class="pi pi-plus" (click)="AddBasket(order.giftId)"></i>
+                                    </div>
+                                    <span class="font-bold text-900">
+                                        {{ order.count }}
+                                    </span>
+                                    <div class="flex align-items-center gap-2">
+                                        <i class="pi pi-minus" (click)="Delete(order.name)"></i>
+                                    </div>
+                                    <div class="flex align-items-center gap-2">
+                                        <i class="pi pi-tag text-sm"></i>
+                                    </div>
+                                </div>
+                            </ng-template>
+                        </p-orderList>
+                    </div>
+                    <div class="text-lg font-medium text-900 mt-2">{{ sum | currency: 'ILS'}}</div>
+                    <div class="flex gap-2">
+                        <p-button icon="pi pi-credit-card" severity="contrast" label="לתשלום" (onClick)="Buy()" />
+                    </div>
+                </p-sidebar>
+                <p-button (onClick)="GetBasket()" severity="contrast" icon="pi pi-shopping-bag" />
+            </div>
+        </ng-template>
+    </p-toolbar>
+    
+
+
+    <div class="card">
+        <p-dataView #dv *ngIf="list$ | async as gifts; else rr" [value]="gifts">
+            <ng-template pTemplate="header">
+                <!-- תפריט חיפוש ותצוגה -->
+                <div class="flex align-items-center justify-content-between gap-3">
+                    <div class="flex align-items-center gap-3">
+                        <div class="flex align-items-center gap-2">
+                            <input pInputText type="text" [(ngModel)]="giftName" (keyup.enter)="GetByGift()"
+                                class="p-inputtext w-15rem" placeholder="שם מתנה">
+                            <p-button label="חיפוש" icon="pi pi-search" severity="primary" (onClick)="GetByGift()"></p-button>
+                        </div>
+                    </div>
+                    <div class="flex justify-content-end">
+                        <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
+                    </div>
+                </div>
+            </ng-template>
+
+
+            <!-- גריד להצגת מתנות -->
+            <ng-template let-product pTemplate="grid">
+                <div class="grid grid-nogutter">
+                    <div class="col-12 sm:col-6 md:col-3 p-2" *ngFor="let gift of gifts">
+                        <div class="p-4 border-1 surface-border surface-card border-round flex flex-column">
+                            <div class="surface-50 flex justify-content-center border-round p-3">
+                                <img *ngIf="gift?.image" [src]="gift.image" [alt]="gift.name"
+                                    class="block mx-auto border-round w-full h-full" style="object-fit: cover;">
+                            </div>
+                            <div class="pt-4">
+                                <div *ngFor="let c of categorys" class="font-medium text-secondary text-sm">
+                                    <span *ngIf="c.id === gift.categoryId">{{ c.name }}</span>
+                                </div>
+                                <div class="text-lg font-medium text-900 mt-1">{{ gift.name }}</div>
+                                <span class="text-2xl font-semibold">{{ gift.pay | currency: 'ILS' }}</span>
+                                <div class="flex gap-2 mt-2">
+                                    <p-button icon="pi pi-shopping-cart" severity="contrast" label="לקניה" (onClick)="AddBasket(gift.id)"></p-button>
+                                    <p-button icon="pi pi-heart" outlined="true"></p-button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ng-template>
+            <ng-template pTemplate="list" let-gifts>
+                <div class="grid grid-nogutter">
+                    <div class="col-12" *ngFor="let item of gifts; let first = first">
+                        <div class="flex flex-column sm:flex-row sm:align-items-center p-4 gap-3"
+                            [ngClass]="{ 'border-top-1 surface-border': !first }">
+
+                            <!-- תיבת התמונה עם גודל פרופורציונלי ו-`object-fit: cover` -->
+                            <div class="md:w-10rem relative" style="aspect-ratio: 1 / 1; height: 15rem;">
+                                <img *ngIf="item?.image" [src]="item.image" [alt]="item.name"
+                                    class="block xl:block mx-auto border-round w-full h-full"
+                                    style="object-fit: cover;" />
+                            </div>
+
+                            <!-- מידע על המתנה -->
+                            <div
+                                class="flex flex-column md:flex-row justify-content-between md:align-items-center flex-1 gap-4">
+                                <div
+                                    class="flex flex-row md:flex-column justify-content-between align-items-start gap-2">
+                                    <div>
+                                        <div *ngFor="let c of categorys" class="font-medium text-secondary text-sm">
+                                            <span *ngIf="c.id === item.categoryId">{{ c.name }}</span>
+                                        </div>
+                                        <div class="text-lg font-medium text-900 mt-2">{{ item.name }}</div>
+                                    </div>
+                                    <div class="surface-100 p-1" style="border-radius: 30px">
+                                        <div class="surface-0 flex align-items-center gap-2 justify-content-center py-1 px-2"
+                                            style="border-radius: 30px; box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.04), 0px 1px 2px 0px rgba(0, 0, 0, 0.06)">
+                                            <i class="pi pi-star-fill text-yellow-500"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex flex-column md:align-items-end gap-5">
+                                    <span class="text-xl font-semibold text-900">{{ item.pay | currency: 'ILS' }}</span>
+                                    <div class="flex flex-row-reverse md:flex-row gap-2">
+                                        <p-button icon="pi pi-heart" severity="secondary" [outlined]="true" />
+                                        <p-button icon="pi pi-shopping-cart" severity="contrast" label="לקניה"
+                                            (onClick)="AddBasket(item.id)" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </ng-template>
+
+            <ng-template pTemplate="footer">
+                   <!-- Pagination Buttons -->
+    <div class="flex justify-content-center mt-3">
+        <p-button (onClick)="nextCallback()" severity="secondary" icon="pi pi-angle-double-right" class="page-circle" />
+        <div class="page-circle mx-2">{{ page }}</div> 
+        <p-button (onClick)="prevCallback()" severity="secondary" icon="pi pi-angle-double-left" class="page-circle" />
+    </div>
+            </ng-template>
+        </p-dataView>
+    </div>
+
+
+    <!-- Empty State Template - This is the 'else' template used when no gifts are available -->
+    <ng-template #rr>
+        <tr>
+            <td colspan="7" class="text-center">
+                אין מתנות
+            </td>
+        </tr>
+    </ng-template>
+    <p-confirmDialog [style]="{ width: '450px' }"></p-confirmDialog>
+</div>

@@ -1,0 +1,35 @@
+html {
+    font-size: 14px;
+}
+
+body {
+    font-family: var(--font-family);
+    font-weight: normal;
+    background: var(--surface-ground);
+    color: var(--text-color);
+    padding: 1rem;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.card {
+    background: var(--surface-card);
+    padding: 2rem;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+}
+.error-container {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    max-width: 300px;
+    z-index: 1000; /* כדי להבטיח שההודעות יופיעו מעל כל שאר האלמנטים */
+  }
+  
+  .custom-messages .p-messages-wrapper {
+    background-color: #ffcccc; /* צבע רקע מותאם */
+    border: 1px solid #ff6666; /* צבע גבול מותאם */
+    border-radius: 8px;
+    padding: 10px;
+  }
+  

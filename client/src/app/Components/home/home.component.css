@@ -1,0 +1,25 @@
+.rr {
+    position: relative;
+    text-align: center;
+    color: white; /* צבע טקסט בהיר שיהיה ברור על התמונה */
+}
+
+.background-image {
+    width: 100%;
+    height: 100vh; /* להבטיח שהתמונה תתפוס את כל גובה הדף */
+    object-fit: cover; /* שימור פרופורציות התמונה */
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1; /* תמונה תמיד תהיה מאחורי הטקסט */
+}
+
+h1 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* ממקם את הכיתוב בדיוק במרכז התמונה */
+    font-size: 3rem;
+    font-weight: bold;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7); /* הוספת הצללה לטקסט להבהרה */
+}

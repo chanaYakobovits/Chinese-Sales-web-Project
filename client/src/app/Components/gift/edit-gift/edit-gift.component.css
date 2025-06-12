@@ -1,0 +1,10 @@
+:host ::ng-deep .p-dialog .product-image {
+    width: 150px;
+    margin: 0 auto 2rem auto;
+    display: block;
+}
+.image-size {
+    margin-left: 17%;
+    width: 250px;  /* אתה יכול לשנות את הגודל לפי הצורך */
+    height: auto;  /* כדי לשמור על פרופורציות התמונה */
+  }

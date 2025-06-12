@@ -1,0 +1,46 @@
+
+:host ::ng-deep .p-dialog .product-image {
+    width: 150px;
+    margin: 0 auto 2rem auto;
+    display: block;
+}
+
+.footer-container {
+    width: 100%;
+    padding: 0.3rem 1rem;
+    display: flex;
+    justify-content: center; /* ממרכז את התוכן */
+    align-items: center; /* מיישר את התוכן לגובה */
+    gap: 1rem; /* ריווח בין הכפתורים */
+    border-top: 1px solid #ddd; /* קו הפרדה דק */
+    background-color: #fff; /* צבע רקע */
+}
+
+.footer-button {
+    font-size: 0.7rem;
+    padding: 0.2rem 0.5rem;
+    border-radius: 8px;
+    height: auto;
+    line-height: 1;
+}
+
+.page-circle {
+    width: 2.5rem; /* רוחב העיגול */
+    height: 2.5rem; /* גובה העיגול */
+    display: flex;
+    justify-content: center; /* ממרכז טקסט אופקית */
+    align-items: center; /* ממרכז טקסט אנכית */
+    font-size: 1rem; /* גודל טקסט */
+    font-weight: bold; /* טקסט מודגש */
+    border-radius: 50%; /* עיגול מלא */
+    background-color: #f0f0f0; /* צבע רקע לעיגול */
+    color: #333; /* צבע טקסט */
+    border: 1px solid #ddd; /* קו מסביב */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* הצללה עדינה */
+}
+
+.footer-container .next-button:hover,
+.footer-container .footer-button:hover {
+    transform: scale(1.05);
+    transition: all 0.2s ease-in-out;
+}

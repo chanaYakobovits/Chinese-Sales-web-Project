@@ -1,0 +1,58 @@
+.stepsdemo-content {
+    max-width: 800px; /* מקדם את המראה על ידי הגבלת רוחב */
+    margin: 0 auto; /* מרכז את התוכן */
+    padding: 20px;
+}
+
+p-card {
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.field {
+    margin-bottom: 15px; /* מרווח בין השדות */
+}
+
+label {
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+}
+
+input, p-inputMask {
+    width: 100%;
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+}
+
+input:focus, p-inputMask:focus {
+    border-color: #007bff; /* צבע כחול בהדגשה */
+    outline: none;
+}
+.payment-button {
+    background-color: #28a745; /* צבע ירוק לכפתור */
+    border-color: #28a745;
+    color: white;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    font-size: 18px; /* הגדלת גודל הפונט */
+    padding: 12px 24px; /* הגדלת הפדינג של הכפתור */
+    width: 100%; /* רוחב מלא */
+    border-radius: 8px; /* גבול מעוגל יותר */
+    text-align: center; /* מרכז את הטקסט בכפתור */
+    display: inline-block; /* הצג את הכפתור כרכיב inline */
+    margin-top: 20px; /* מרווח בין השדות לכפתור */
+}
+
+.payment-button:hover {
+    background-color: #218838; /* שינוי צבע בהעברה */
+}
+
+.payment-button:active {
+    background-color: #1e7e34; /* שינוי צבע בלחיצה */
+}
+.grid {
+    display: flex;
+    justify-content: flex-end;
+}

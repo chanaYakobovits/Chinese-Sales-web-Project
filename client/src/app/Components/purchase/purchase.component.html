@@ -1,0 +1,72 @@
+<div class="card" dir="rtl">
+    <p-table #dt [exportHeader]="'customExportHeader'" [tableStyle]="{ 'min-width': '50rem' }">
+        <ng-template pTemplate="caption">
+            <div style="text-align: left">
+                <p-button icon="pi pi-external-link" label="Export" (onClick)="dt.exportCSV()" />
+            </div>
+            <strong>רווח: {{ sum | currency:'USD' }}</strong>
+        </ng-template>
+        <ng-template pTemplate="header" let-columns>
+            <tr>
+                <th *ngFor="let col of columns">
+                    {{ col.header }}
+                </th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-rowData let-columns="columns">
+            <tr [pSelectableRow]="rowData">
+                <td *ngFor="let col of columns">
+                    {{ rowData[col.field] }}
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+    <p-table [value]="purchase$" [rows]="10" [paginator]="true" responsiveLayout="scroll" dataKey="giftName">
+        <ng-template pTemplate="header">
+           
+
+            <tr>
+                <th pSortableColumn="giftName">שם מתנה <p-sortIcon field="giftName"></p-sortIcon></th>
+                <th pSortableColumn="ticketCost">כמות <p-sortIcon field="ticketCost"></p-sortIcon></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-purchase>
+            <tr>
+                <td>{{ purchase.name }}</td>
+                <td>{{ purchase.count }}</td>
+                <!-- <td>רווח: {{ sumToGift(purchase) | currency:'USD' }}</td> -->
+                <td>
+                    <button type="button" (click)="getPurchaseByGift(purchase)" pButton
+                        icon="pi pi-external-link" label="רשימת רוכשים">
+                    </button>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>
+<p-dialog header="רשימת הרוכשים" [(visible)]="dialogVisible" [resizable]="false" [modal]="true" appendTo="body"
+    [style]="{width: '75vw'}" dir="rtl">
+    <p-table [value]="user" responsiveLayout="scroll">
+        <ng-template pTemplate="header">
+            <tr>
+                <th>שם רוכש</th>
+                <th>מייל</th>
+                <th>כתובת</th>
+                <th>פאלפון</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-user dir="">
+            <tr>
+                <td>{{ user.name }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.adress }}</td>
+                <td>{{ user.phone }}</td>
+            </tr>
+        </ng-template>
+    </p-table>
+    <ng-template pTemplate="footer">
+        <button type="button" pButton icon="pi pi-times" (click)="dialogVisible = false" label="סגור"
+            class="p-button-text">
+        </button>
+    </ng-template>
+</p-dialog>
